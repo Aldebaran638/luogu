@@ -9,10 +9,10 @@
         "-g",
         "${file}",
         "-o",
-        "${fileDirname}\\file_exe\\${fileBasenameNoExtension}.exe"
+        "${workspaceFolder}\\_file_exe\\${fileBasenameNoExtension}.exe"
       ],
       "options": {
-        "cwd": "${fileDirname}"
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [
         "$gcc"

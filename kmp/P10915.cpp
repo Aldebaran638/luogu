@@ -1,16 +1,18 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 #define int long long
 #define endl '\n';
 
 using namespace std;
 
-
-signed main(){
+signed main()
+{
 #ifndef ONLINE_JUDGE
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
+	freopen("in.txt", "r", stdin);
+	freopen("out.txt", "w", stdout);
 #endif
-	ios::sync_with_stdio(false);	
-
+	ios::sync_with_stdio(false);
+	int a;
+	cin >> a;
+	cout << a << endl;
 }

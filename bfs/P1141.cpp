@@ -1,59 +1,68 @@
-//bfsÌâÄ¿(µ«ÊÇÒªbfsÓÅ»¯²ÅÄÜÂú·Ö.ÕâÀïµ¥´¿Ğ´Ò»¸öBFS¼ÇÒä»¯ËÑË÷Ö»ÄÜ70·Ö.¾¡Á¦ÁË¾¡Á¦ÁË 
-//getchar()¶Á²»µ½¶«Î÷»áÔÚÂå¹ÈÉÏµ¼ÖÂRE 
-//³öÏÖÁËÒ»¶ÑÎ´ÔøÒâÁÏµÄÎÊÌâ.getcharµ¼ÖÂRE,whileµÄµÚÈı¸öifÂ©ÁË´óÀ¨ºÅµ¼ÖÂBFSÍ£²»ÏÂÀ´
-//BFSº¯Êımemset·ÅÔÚÁË³õÊ¼»¯havarrive[x][y]=1Ö®ÏÂ,µ¼ÖÂ³ö´í
-//memsetÊ¹ÓÃ´íÎóµ¼ÖÂmemsetÎŞĞ§
- 
- 
-//ÎÒÏÖÔÚÕâ¸ö´úÂëÖ»ÄÜÄÃÆßÊ®·Ö.ÒªÄÃÂú·ÖĞèÒª½áºÏÁªÍ¨¿é(µ±È»Ã»Ñ§¹ı²»ÖªµÀ) 
-#include<bits/stdc++.h>
-#define endl '\n' 
+// bfsé¢˜ç›®(ä½†æ˜¯è¦bfsä¼˜åŒ–æ‰èƒ½æ»¡åˆ†.è¿™é‡Œå•çº¯å†™ä¸€ä¸ªBFSè®°å¿†åŒ–æœç´¢åªèƒ½70åˆ†.å°½åŠ›äº†å°½åŠ›äº†
+// getchar()è¯»ä¸åˆ°ä¸œè¥¿ä¼šåœ¨æ´›è°·ä¸Šå¯¼è‡´RE
+// å‡ºç°äº†ä¸€å †æœªæ›¾æ„æ–™çš„é—®é¢˜.getcharå¯¼è‡´RE,whileçš„ç¬¬ä¸‰ä¸ªifæ¼äº†å¤§æ‹¬å·å¯¼è‡´BFSåœä¸ä¸‹æ¥
+// BFSå‡½æ•°memsetæ”¾åœ¨äº†åˆå§‹åŒ–havarrive[x][y]=1ä¹‹ä¸‹,å¯¼è‡´å‡ºé”™
+// memsetä½¿ç”¨é”™è¯¯å¯¼è‡´memsetæ— æ•ˆ
+
+// æˆ‘ç°åœ¨è¿™ä¸ªä»£ç åªèƒ½æ‹¿ä¸ƒååˆ†.è¦æ‹¿æ»¡åˆ†éœ€è¦ç»“åˆè”é€šå—(å½“ç„¶æ²¡å­¦è¿‡ä¸çŸ¥é“)
+#include <bits/stdc++.h>
+#define endl '\n'
 
 using namespace std;
 
-int n,m;
-const int N=1e3+1,M=1e5+20;
+int n, m;
+const int N = 1e3 + 1, M = 1e5 + 20;
 int num[N][N];
 bool havarrive[N][N];
 
-int a[4]={-1,0,1,0};
-int b[4]={0,-1,0,1};
+int a[4] = {-1, 0, 1, 0};
+int b[4] = {0, -1, 0, 1};
 
-struct node{
-	int x,y;
+struct node
+{
+	int x, y;
 };
 
-void outhavarrive(){
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=n;j++){
-			cout<<havarrive[i][j];
+void outhavarrive()
+{
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			cout << havarrive[i][j];
 		}
-		cout<<endl;
+		cout << endl;
 	}
 }
 
-int fresult(int x,int y){
-	int result=0;
-	memset(havarrive,0,sizeof(havarrive));
-	
+int fresult(int x, int y)
+{
+	int result = 0;
+	memset(havarrive, 0, sizeof(havarrive));
+
 	queue<node> q;
 	node node1;
-	node1.x=x,node1.y=y;
+	node1.x = x, node1.y = y;
 	q.push(node1);
-	havarrive[x][y]=1;
+	havarrive[x][y] = 1;
 	result++;
-	
-	while(!q.empty()){
-		node nownode=q.front();
-		int _x=nownode.x,_y=nownode.y;
-		for(int i=0;i<4;i++){
-			if((_x+a[i]>=1&&_x+a[i]<=n)&&(_y+b[i]>=1&&_y+b[i]<=n)){
-				if(!havarrive[_x+a[i]][_y+b[i]]){
-					//outhavarrive();
-					if(num[_x+a[i]][_y+b[i]]!=num[_x][_y]){
-						havarrive[_x+a[i]][_y+b[i]]=1;
+
+	while (!q.empty())
+	{
+		node nownode = q.front();
+		int _x = nownode.x, _y = nownode.y;
+		for (int i = 0; i < 4; i++)
+		{
+			if ((_x + a[i] >= 1 && _x + a[i] <= n) && (_y + b[i] >= 1 && _y + b[i] <= n))
+			{
+				if (!havarrive[_x + a[i]][_y + b[i]])
+				{
+					// outhavarrive();
+					if (num[_x + a[i]][_y + b[i]] != num[_x][_y])
+					{
+						havarrive[_x + a[i]][_y + b[i]] = 1;
 						node newnode;
-						newnode.x=_x+a[i],newnode.y=_y+b[i];
+						newnode.x = _x + a[i], newnode.y = _y + b[i];
 						q.push(newnode);
 						result++;
 					}
@@ -65,26 +74,28 @@ int fresult(int x,int y){
 	return result;
 }
 
-
-
-signed main(){
-	//ios::sync_with_stdio(false);
+signed main()
+{
+	// ios::sync_with_stdio(false);
 #ifndef ONLINE_JUDGE
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
+	freopen("in.txt", "r", stdin);
+	freopen("out.txt", "w", stdout);
 #endif
-	cin>>n>>m;
+	cin >> n >> m;
 	char c;
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=n;j++){
-			cin>>c;
-			num[i][j]=c-'0';
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			cin >> c;
+			num[i][j] = c - '0';
 		}
 	}
 
-	for(int i=1;i<=m;i++){
-		int x,y;
-		cin>>x>>y;
-		cout<<fresult(x,y)<<endl;
+	for (int i = 1; i <= m; i++)
+	{
+		int x, y;
+		cin >> x >> y;
+		cout << fresult(x, y) << endl;
 	}
 }

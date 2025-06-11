@@ -1,86 +1,104 @@
-//KMPËã·¨Ä£°åÌâ,×Ö·û´®Æ¥Åä 
-#include<bits/stdc++.h>
+// KMPç®—æ³•æ¨¡æ¿é¢˜,å­—ç¬¦ä¸²åŒ¹é…
+#include <bits/stdc++.h>
 
 #define int long long
 #define endl '\n';
 
 using namespace std;
 
-string s1,s2;
+string s1, s2;
 
-//s2µÄnextÊı×é 
+// s2çš„nextæ•°ç»„
 vector<int> nexts;
 vector<int> result;
 
-void getnext(){
-	int len=0,i=1;
+void getnext()
+{
+	int len = 0, i = 1;
 	nexts.push_back(0);
-	while(i<s2.size()){
-		if(s2[i]==s2[len]){
+	while (i < s2.size())
+	{
+		if (s2[i] == s2[len])
+		{
 			nexts.push_back(++len);
 			i++;
 		}
-		else{
-			if(len==0){
+		else
+		{
+			if (len == 0)
+			{
 				nexts.push_back(0);
 				i++;
 			}
-			else{
-				len=nexts[len-1];
+			else
+			{
+				len = nexts[len - 1];
 			}
 		}
 	}
 }
 
-void getresult(){
-	int len=0,i=0;
-	while(i<s1.size()){
-		if(s2[len]==s1[i]){
-			len++,i++;
+void getresult()
+{
+	int len = 0, i = 0;
+	while (i < s1.size())
+	{
+		if (s2[len] == s1[i])
+		{
+			len++, i++;
 		}
-		else {
-			if(len==0){
+		else
+		{
+			if (len == 0)
+			{
 				i++;
 			}
-			else{
-				len=nexts[len-1];
+			else
+			{
+				len = nexts[len - 1];
 			}
 		}
-		if(len==s2.size()){
-			len=nexts[len-1];
-			result.push_back(i-s2.size()+1);
+		if (len == s2.size())
+		{
+			len = nexts[len - 1];
+			result.push_back(i - s2.size() + 1);
 		}
 	}
 }
 
-void coutvector(vector<int> &a){
-	for(int i=0;i<a.size();i++){
-		cout<<a[i]<<" ";
+void coutvector(vector<int> &a)
+{
+	for (int i = 0; i < a.size(); i++)
+	{
+		cout << a[i] << " ";
 	}
-	cout<<endl;
+	cout << endl;
 }
 
-signed main(){
+signed main()
+{
 #ifndef ONLINE_JUDGE
-	freopen("in.txt","r",stdin);
-	freopen("out.txt","w",stdout);
+	freopen("in.txt", "r", stdin);
+	freopen("out.txt", "w", stdout);
 #endif
-	ios::sync_with_stdio(false);	
-	cin>>s1>>s2;
-	//Éú³ÉnextÊı×é
+	ios::sync_with_stdio(false);
+	cin >> s1 >> s2;
+	// ç”Ÿæˆnextæ•°ç»„
 	getnext();
-	//Æ¥Åä×Ö·û´® 
+	// åŒ¹é…å­—ç¬¦ä¸²
 	getresult();
-	
-	//Êä³ö½á¹û 
-	for(int i=0;i<result.size();i++){
-		cout<<result[i]<<endl;
+
+	// è¾“å‡ºç»“æœ
+	for (int i = 0; i < result.size(); i++)
+	{
+		cout << result[i] << endl;
 	}
-	
-	for(int i=0;i<nexts.size();i++){
-		cout<<nexts[i]<<" ";
+
+	for (int i = 0; i < nexts.size(); i++)
+	{
+		cout << nexts[i] << " ";
 	}
-	cout<<endl;
-	
-	//Æ¥Åä×Ö·û´® 
+	cout << endl;
+
+	// åŒ¹é…å­—ç¬¦ä¸²
 }
