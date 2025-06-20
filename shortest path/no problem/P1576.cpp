@@ -1,5 +1,5 @@
-// 2025年6月18日
-// 算法：弗洛伊德
+// 2025年6月17日
+// 算法：弗洛伊德(但是超时。这道题用这个算法就该超时好吧，等我复习完dijk再来)
 #include <bits/stdc++.h>
 
 #define ll long long
@@ -13,14 +13,8 @@ int n, m, a, b;
 const int N = 2e3 + 20, M = 1e6 + 20;
 double num[N][N];
 
-signed main(int argc, const char *argv[])
+void Solution()
 {
-#ifndef ONLINE_JUDGE
-  freopen("in.txt", "r", stdin);
-  freopen("out.txt", "w", stdout);
-  mtx.lock();
-  startt = std::chrono::steady_clock::now();
-#endif
   cin >> n >> m;
 
   for (int i = 1; i <= n; i++)
@@ -39,7 +33,20 @@ signed main(int argc, const char *argv[])
       for (int k = j + 1; k <= n; k++)
         num[j][k] = num[k][j] = min(num[j][i] + (100 - num[j][i]) * num[i][k] * 0.01, num[j][k]);
   cin >> a >> b;
-  cout << 100 / (1-num[a][b]/100.0) << endl;
+  cout << 100 / (1 - num[a][b] / 100.0) << endl;
+}
+
+signed main(int argc, const char *argv[])
+{
+#ifndef ONLINE_JUDGE
+  freopen("in.txt", "r", stdin);
+  freopen("out.txt", "w", stdout);
+  mtx.lock();
+  startt = std::chrono::steady_clock::now();
+#endif
+
+  Solution();
+
 #ifndef ONLINE_JUDGE
   endt = std::chrono::steady_clock::now();
   mtx.unlock();
